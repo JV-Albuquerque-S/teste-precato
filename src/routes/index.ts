@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-//import
+import formRouter from "./formRouter";
 
 const router = Router();
 
-//router.use();
+router.use(formRouter);
 
 export default router;
