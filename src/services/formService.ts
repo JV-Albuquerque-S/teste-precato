@@ -6,8 +6,20 @@ async function insert(CreateFormData: CreateFormData) {
     const existingEmail = await formRepository.findByEmail(
         CreateFormData.email
     );
+    const existingCPF = await formRepository.findByCPF(
+        CreateFormData.cpf
+    );
+    const existingPhone = await formRepository.findByPhone(
+        CreateFormData.phone
+    );
     if(existingEmail){
         throw conflictError("Email already used");
+    }
+    else if(existingCPF){
+        throw conflictError("CPF already used");
+    }
+    else if(existingPhone){
+        throw conflictError("Phone already used");
     }
     await formRepository.createForm(CreateFormData);
 }

@@ -6,7 +6,8 @@ import { wrongSchemaError } from "../utils/errorUtils";
 async function postForms(req: Request, res: Response){
     const validation = formSchema.validate(req.body);
     if(validation.error){
-        throw wrongSchemaError();
+        let wrongEntry = validation.error.details[0].context?.key;
+        throw wrongSchemaError(wrongEntry+" must be valid");
     }
     await formService.insert(req.body);
     res.sendStatus(201);

@@ -1,5 +1,5 @@
 import { forms_answers } from "@prisma/client";
-import { prisma } from "../database.js";
+import { prisma } from "../database";
 
 export type CreateFormData = Omit<forms_answers, "id">;
 
@@ -15,7 +15,21 @@ function findByEmail(email: string){
     });
 }
 
+function findByCPF(cpf: string){
+    return prisma.forms_answers.findUnique({
+        where: {cpf},
+    });
+}
+
+function findByPhone(phone: string){
+    return prisma.forms_answers.findUnique({
+        where: {phone},
+    });
+}
+
 export const formRepository = {
     createForm,
-    findByEmail
+    findByEmail,
+    findByCPF,
+    findByPhone
 }
