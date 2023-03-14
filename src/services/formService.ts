@@ -1,6 +1,7 @@
 import { CreateFormData } from "../repositories/formRepository";
 import { formRepository } from "../repositories/formRepository";
 import { conflictError, notFoundError } from "../utils/errorUtils";
+import dayjs from "dayjs";
 
 async function insert(CreateFormData: CreateFormData) {
     const existingEmail = await formRepository.findByEmail(
@@ -24,6 +25,11 @@ async function insert(CreateFormData: CreateFormData) {
     await formRepository.createForm(CreateFormData);
 }
 
+async function get(start_date: string, end_date: string){
+    return formRepository.findByDate(start_date, end_date);
+}
+
 export const formService = {
-    insert
+    insert,
+    get
 }

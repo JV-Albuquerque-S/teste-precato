@@ -13,6 +13,13 @@ async function postForms(req: Request, res: Response){
     res.sendStatus(201);
 }
 
+async function getForms(req: Request, res: Response){
+    const {start_date, end_date} = req.body;
+    const forms = await formService.get(start_date, end_date);
+    res.send(forms);
+}
+
 export const formController = {
-    postForms
+    postForms,
+    getForms
 }
