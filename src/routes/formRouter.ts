@@ -1,10 +1,8 @@
 import { Router } from "express";
-import { postForms } from "../controllers/formController";
-import { validateSchema } from "../middlewares/validateSchema";
-import { formSchema } from "../schemas/formSchemas";
+import { formController } from "../controllers/formController";
 
 const formRouter = Router();
 
-formRouter.post("/forms", validateSchema(formSchema), postForms);
+formRouter.post("/forms", formController.postForms);
 
 export default formRouter;
