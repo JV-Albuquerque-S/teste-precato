@@ -10,53 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
+model forms_answers {
   id         Int       @id @default(autoincrement())
+  name       String    
   email      String    @unique
-  password   String    
-}
-
-model categories {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  tests     tests[]
-}
-
-model teachers {
-  id                  Int       @id @default(autoincrement())
-  name                String    @unique
-  teacherDisciplines  teacherDisciplines[]
-}
-
-model terms {
-  id            Int       @id @default(autoincrement())
-  number        Int       @unique
-  disciplines   disciplines[]
-}
-
-model disciplines {
-  id                  Int       @id @default(autoincrement())
-  name                String    @unique
-  termId              Int
-  teacherDisciplines  teacherDisciplines[]
-  terms               terms     @relation(fields: [termId], references: [id])
-}
-
-model teacherDisciplines {
-  id            Int           @id @default(autoincrement())
-  disciplineId  Int
-  teacherId     Int
-  tests         tests[]
-  teachers      teachers      @relation(fields: [teacherId], references: [id])
-  disciplines   disciplines   @relation(fields: [disciplineId], references: [id])
-}
-
-model tests {
-  id                      Int                 @id @default(autoincrement())
-  name                    String
-  pdfUrl                  String
-  categoryId              Int
-  teacherDisciplineId     Int
-  categories              categories          @relation(fields: [categoryId], references: [id])
-  teacherDisciplines      teacherDisciplines  @relation(fields: [teacherDisciplineId], references: [id])
+  cpf        String    @unique
+  phone      String    @unique
+  created_at DateTime  @default(now())
 }
